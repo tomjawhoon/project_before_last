@@ -73,6 +73,7 @@
       let tokenAddress = document.getElementById('token-address').value;
       if(tokenAddress != "") {
         window.tokenContract = getERC20TokenContract(tokenAddress);
+        window.tokenContract.options.from = web3js.eth.defaultAccount;
         getERC20TokenDecimals((decimals) => {
           document.getElementById('decimals').value = decimals;
         });
@@ -105,6 +106,11 @@
         web3js = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io"));
       }
       console.log(web3js);
+      console.log(web3js.eth.defaultAccount);
+      web3js.eth.defaultAccount = '0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a';
+      console.log(web3js.eth.defaultAccount);
+      web3js.eth.personal.unlockAccount("0x6c25FE295Ecee6F0D8D34fC28dca2de68538fA4a", "test password!", 600)
+.then(console.log('Account unlocked!'));
     }
 
   </script>
